@@ -15,10 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "route")
-@NamedEntityGraph(
-        name = "Route.applications",
-        attributeNodes = @NamedAttributeNode("applications")
-)
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

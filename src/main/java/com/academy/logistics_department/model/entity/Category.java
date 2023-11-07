@@ -16,10 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "category")
-@NamedEntityGraph(
-        name = "Category.users",
-        attributeNodes = @NamedAttributeNode("users")
-)
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +23,4 @@ public class Category {
     @Column(name = "category_name", unique = true)
     @Enumerated(EnumType.STRING)
     private CategoryEnum categoryName;
-    @ManyToMany(mappedBy = "categories")
-    private List<User> users;
 }

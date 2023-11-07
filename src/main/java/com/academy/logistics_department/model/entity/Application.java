@@ -14,10 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "application")
-@NamedEntityGraph(
-        name = "Application.items",
-        attributeNodes = @NamedAttributeNode("items")
-)
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +30,7 @@ public class Application {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Status status;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private User customer;
 }
