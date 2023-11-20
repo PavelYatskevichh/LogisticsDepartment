@@ -6,7 +6,7 @@ create table address(
     primary key (id)
 );
 
-create table status(
+create table application_status(
 	id integer auto_increment not null,
     status_name varchar(64) not null,
     primary key (id),
@@ -20,11 +20,23 @@ create table category(
     unique (category_name)
 );
 
-create table driver(
+create table role(
+    id integer auto_increment not null,
+    role_name varchar(64) not null,
+    primary key (id),
+    unique (role_name)
+);
+
+create table user(
 	id integer auto_increment not null,
+	role_id integer not null,
     first_name varchar(64) not null,
     last_name varchar(64) not null,
-    primary key (id)
+    email_address varchar(255) not null,
+    phone_number varchar(15) not null,
+    password varchar(255) not null,
+    primary key (id),
+    foreign key (role_id) references role(id)
 );
 
 create table drivers_category(
@@ -32,7 +44,7 @@ create table drivers_category(
     driver_id integer not null,
     category_id integer not null,
     primary key (id),
-    foreign key (driver_id) references driver(id),
+    foreign key (driver_id) references user(id),
     foreign key (category_id) references category(id)
 );
 
@@ -53,9 +65,11 @@ create table route(
 	id integer auto_increment not null,
     driver_id integer not null,
     vehicle_id integer not null,
+    manager_id integer not null,
     primary key (id),
-    foreign key (driver_id) references driver(id),
-    foreign key (vehicle_id) references vehicle(id)
+    foreign key (driver_id) references user(id),
+    foreign key (vehicle_id) references vehicle(id),
+    foreign key (manager_id) references user(id)
 );
 
 create table application(
@@ -63,12 +77,14 @@ create table application(
     route_id integer not null,
     loading_address_id integer not null,
     unloading_address_id integer not null,
+    customer_id integer not null,
     status_id integer not null,
     primary key (id),
     foreign key (route_id) references route(id),
     foreign key (loading_address_id) references address(id),
     foreign key (unloading_address_id) references address(id),
-    foreign key (status_id) references status(id)
+    foreign key (customer_id) references user(id),
+    foreign key (status_id) references application_status(id)
 );
 
 create table item(

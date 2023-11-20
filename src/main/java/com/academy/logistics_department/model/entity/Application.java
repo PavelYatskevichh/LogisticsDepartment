@@ -28,9 +28,9 @@ public class Application {
     @JoinColumn(name = "unloading_address_id")
     private Address unloadingAddress;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
-    private Status status;
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private User customer;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "status_id")
+    private ApplicationStatus status;
 }

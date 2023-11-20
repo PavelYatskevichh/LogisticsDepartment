@@ -5,7 +5,7 @@ import com.academy.logistics_department.model.entity.Route;
 
 import java.util.List;
 
-public interface SupplyService {
+public interface ManagerService {
     List<Application> getAllApplications();
     List<Application> getAllManagersApplications();
     void createRoute(Route route);

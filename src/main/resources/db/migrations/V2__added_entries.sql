@@ -1,11 +1,11 @@
-insert into status(status_name)
+insert into application_status(status_name)
 values
     ('PROCESSING'),
     ('WAITING_FOR_LOADING'),
     ('ON_THE_WAY'),
     ('DELIVERED');
 
-insert into user_role(role_name)
+insert into role(role_name)
 values
     ('CUSTOMER'),
     ('MANAGER'),

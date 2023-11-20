@@ -1,6 +1,6 @@
 package com.academy.logistics_department.model.entity;
 
-import com.academy.logistics_department.model.enums.StatusEnum;
+import com.academy.logistics_department.model.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "status")
-public class Status {
+@Table(name = "role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "status_name", unique = true)
+    @Column(name = "role_name", unique = true)
     @Enumerated(EnumType.STRING)
-    private StatusEnum statusName;
+    private RoleEnum roleName;
 }
