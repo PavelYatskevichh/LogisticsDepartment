@@ -1,5 +1,6 @@
 package com.academy.logistics_department.dto;
 
+import com.academy.logistics_department.model.enums.CategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,11 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class CategoryDto {
     private Integer id;
-    private RoleDto role;
-    private String firstName;
-    private String lastName;
-    private String emailAddress;
-    private String phoneNumber;
+    private CategoryEnum categoryName;
 }

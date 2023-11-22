@@ -16,8 +16,8 @@ import java.util.List;
 public class RouteDto {
     private Integer id;
     private List<ApplicationDto> applications;
-    private User driver;
-    private Vehicle vehicle;
-    private User manager;
+    private DriverDto driver;
+    private VehicleDto vehicle;
+    private UserDto manager;
     private RouteStatusEnum status;
 }

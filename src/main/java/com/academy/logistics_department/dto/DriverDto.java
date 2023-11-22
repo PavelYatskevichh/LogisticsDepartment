@@ -13,10 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 public class DriverDto {
     private Integer id;
-    private Role role;
+    private RoleDto role;
     private String firstName;
     private String lastName;
     private String emailAddress;
     private String phoneNumber;
-    private List<Category> categories;
+    private List<CategoryDto> categories;
 }

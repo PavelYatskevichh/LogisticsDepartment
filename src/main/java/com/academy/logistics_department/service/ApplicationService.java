@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface ApplicationService {
     List<ApplicationDto> getAllActiveDriversApplications(RouteDto routeDto);
     List<ApplicationDto> getAllDeliveredDriversApplications(RouteDto routeDto);
-    Optional<ApplicationStatusEnum> changeApplicationStatus(RouteDto route, Integer applicationId);
+    ApplicationStatusEnum changeApplicationStatus(RouteDto route, Integer applicationId);
 }

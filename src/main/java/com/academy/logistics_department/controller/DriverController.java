@@ -2,7 +2,11 @@ package com.academy.logistics_department.controller;
 
 import com.academy.logistics_department.dto.ApplicationDto;
 import com.academy.logistics_department.dto.RouteDto;
+import com.academy.logistics_department.dto.UserDto;
+import com.academy.logistics_department.mappers.UserMapper;
+import com.academy.logistics_department.model.entity.User;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
+import com.academy.logistics_department.model.repository.UserRepository;
 import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.RouteService;
 import lombok.RequiredArgsConstructor;
@@ -72,8 +76,8 @@ public class DriverController {
                                @RequestParam Integer routeId,
                                @RequestParam Integer applicationId) {
         RouteDto routeDto = routeService.getRouteById(driverId, routeId);
-        Optional<ApplicationStatusEnum> optionalApplicationStatusEnum = applicationService.changeApplicationStatus(routeDto, applicationId);
+        ApplicationStatusEnum applicationStatusEnum = applicationService.changeApplicationStatus(routeDto, applicationId);
 
-        return optionalApplicationStatusEnum.orElseThrow().name();
+        return applicationStatusEnum.name();
     }
 }

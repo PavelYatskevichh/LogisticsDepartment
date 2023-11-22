@@ -1,8 +1,8 @@
 package com.academy.logistics_department.mappers;
 
 import com.academy.logistics_department.dto.ApplicationDto;
+import com.academy.logistics_department.dto.ApplicationStatusDto;
 import com.academy.logistics_department.model.entity.Application;
-import com.academy.logistics_department.model.entity.ApplicationStatus;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class ApplicationListMapperTest {
         //given
         ApplicationDto dto = new ApplicationDto();
         dto.setId(11);
-        dto.setStatus(ApplicationStatus.builder().id(1).statusName(ApplicationStatusEnum.ON_THE_WAY).build());
+        dto.setStatus(new ApplicationStatusDto(1, ApplicationStatusEnum.ON_THE_WAY));
 
         List<ApplicationDto> dtos = Collections.singletonList(dto);
 
