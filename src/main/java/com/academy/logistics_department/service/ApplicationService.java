@@ -6,10 +6,15 @@ import com.academy.logistics_department.model.entity.Application;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ApplicationService {
     List<ApplicationDto> getAllActiveDriversApplications(RouteDto routeDto);
     List<ApplicationDto> getAllDeliveredDriversApplications(RouteDto routeDto);
-    ApplicationStatusEnum changeApplicationStatus(RouteDto route, Integer applicationId);
+    ApplicationStatusEnum changeApplicationStatus(RouteDto routeDto, Integer applicationId);
+    List<ApplicationDto> getAllActiveCustomersApplications(Integer customerId);
+    List<ApplicationDto> getAllDeliveredCustomersApplications(Integer customerId);
+    void createApplication(Application application);
+    void changeApplication(Integer id);
+    ApplicationDto getCustomersApplicationDto(Integer customerId, Integer applicationId);
+    List<ApplicationDto> getAllUnallocatedApplications();
 }

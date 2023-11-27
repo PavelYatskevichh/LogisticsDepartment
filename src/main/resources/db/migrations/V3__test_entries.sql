@@ -16,15 +16,15 @@ values
 
 insert into drivers_category(driver_id, category_id)
 values
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (1, 4),
-    (1, 5),
-    (2, 2),
-    (2, 4),
     (3, 1),
-    (3, 2);
+    (3, 2),
+    (3, 3),
+    (3, 4),
+    (3, 5),
+    (4, 2),
+    (4, 4),
+    (5, 1),
+    (5, 2);
 
 insert into vehicle(vehicle_name, max_load_capacity, max_trip_distance, dim_X_restriction, dim_Y_restriction,
     dim_Z_restriction, required_category_id)
@@ -76,17 +76,20 @@ values
     (3, 7, 17, 1, 7),
     (3, 16, 17, 1, 7);
 
+insert into item(application_id, item_name, weight, dim_X, dim_Y, dim_Z)
+values
+    (1, "Sports mat", 3, 500, 100, 100),
+    (3, "Postmodern painting", 1, 600, 30, 400),
+    (9, "Reinforcement", 13000, 12000, 1200, 600),
+    (10, "Wardrobe Monblan", 80, 2400, 1000, 2000),
+    (11, "Armchair Rococo", 500, 1100, 1000, 1200),
+    (7, "Nike SB Low", 2, 400, 250, 100),
+    (8, "AirJordan 36", 3, 380, 220, 100);
+
 insert into item(application_id, weight, dim_X, dim_Y, dim_Z)
 values
-    (1, 3, 500, 100, 100),
-    (3, 1, 600, 30, 400),
     (3, 30, 800, 700, 800),
-    (9, 13000, 12000, 1200, 600),
     (2, 20, 600, 400, 200),
     (4, 3, 200, 150, 150),
-    (10, 80, 2400, 1000, 2000),
-    (11, 500, 1100, 1000, 1200),
     (5, 2, 300, 300, 100),
-    (6, 5, 500, 600, 200),
-    (7, 2, 400, 250, 100),
-    (8, 3, 380, 220, 100);
+    (6, 5, 500, 600, 200);

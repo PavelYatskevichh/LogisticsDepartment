@@ -16,6 +16,8 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "item_name")
+    private String name;
     @Column(name = "weight")
     private Integer weight;
     @Column(name = "dim_X")

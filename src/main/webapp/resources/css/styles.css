@@ -1,14 +1,182 @@
+html {
+    height: 100%;
+}
+
 body {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 400;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+.content {
+    margin-left: 10%;
+    padding-bottom: 118px;
 }
 
 .button {
+    background-color: rgb(37, 189, 102, 1.0);
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+    font-size: medium;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.statusbtn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.statusbtn:hover {
+    background-color: rgb(37, 189, 102, 1.0);
+    color: white;
+}
+
+.gradient {
+	background: linear-gradient(rgb(240, 240, 240, 0.8), white);
+	height: 30px;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.title-container div {
+    margin-bottom: 6px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: large;
+    margin-top: 20px;
+    margin-bottom: 6px;
+    margin-right: 5px;
+}
+
+#special-title {
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0px 5px;
+}
+
+.active {
+    color: rgb(37, 189, 102, 1.0) !important;
+}
+
+.header {
+    display: flex;
+    column-gap: 0px;
+    padding: 20px;
+}
+.header a {
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+    padding: 15px 30px;
+    text-decoration: none;
+}
+.header a:hover{
+    background-color: #ddd;
+}
+
+.authorization {
+    margin-left: auto;
+}
+
+.item {
+    color: black;
+    text-decoration: none;
+    padding: 4px;
+    display: inline-block;
+}
+.item:hover {
+    background-color: #ddd;
+}
+
+.tbl td, tr {
+    padding: 6px 10px;
+    vertical-align: top;
+    border-top: 2px solid #ddd;
+}
+
+.tbl th {
+    padding: 6px 10px;
+}
+
+.tbl-details td, tr {
+    padding: 4px;
+    border-top: 0px solid #ddd;
+}
+
+.prop {
+    text-align: right;
+    font-size: small;
 }
 
 .status {
+    color: rgb(120, 120, 120, 1.0);
+    font-style: italic;
+    display: inline;
+}
+
+.delivered {
+    color: rgb(37, 189, 102, 1.0);
+    font-style: italic;
+    display: inline;
+}
+
+footer {
+    background-color: rgb(24, 42, 42, 1.0);
+    text-align: center;
+    color: white;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer-contacts, .footer-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footer-info div {
+    padding: 30px 50px;
+    text-align: center;
+}
+
+.footer-contacts div {
+    color: #ddd;
+    margin-bottom: 10px;
+    padding: 0px 40px;
+    text-align: center;
+    font-size: medium;
+    text-decoration: none;
+}
+
+.footer-contacts div a {
+    color: rgb(120, 120, 120, 1.0);
+    text-decoration: none;
 }

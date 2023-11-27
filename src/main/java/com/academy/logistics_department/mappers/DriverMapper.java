@@ -11,5 +11,6 @@ public interface DriverMapper {
     DriverDto toDto(User user);
     @Mapping(target = "password", ignore = true)
     User toModel(DriverDto driverDto);
+    @Mapping(target = "password", ignore = true)
     void updateModel(DriverDto driverDto, @MappingTarget User user);
 }

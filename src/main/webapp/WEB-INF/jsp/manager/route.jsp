@@ -1,10 +1,21 @@
-<%@include file="../common/driverHeader.jsp"%>
+<%@include file="../common/managerHeader.jsp"%>
         <div class="content">
             <div class="title-container">
                 <div id="special-title" class="title">Route ID: ${route.id}</div>
+            </div>
+
+            <div class="title-container">
+                <div class="title">Driver: </div>
                 <div>
-                    Manager: ${route.manager.firstName} ${route.manager.lastName}
-                    <a href="tel:${route.manager.phoneNumber}">${route.manager.phoneNumber}</a>
+                    ${route.driver.firstName} ${route.driver.lastName}
+                    <a href="tel:${route.driver.phoneNumber}">${route.driver.phoneNumber}</a>
+                </div>
+            </div>
+
+            <div class="title-container">
+                <div class="title">Transport: </div>
+                <div>
+                    ${route.vehicle.name}
                 </div>
             </div>
 
@@ -20,10 +31,13 @@
                             <table class="tbl-details">
                                 <tr>
                                     <td class="prop">
-                                        Items IDs:
+                                        Items:
                                     </td>
                                     <td class="holder">
-                                        <c:forEach var="item" items="${aApp.items}">${item.id}, </c:forEach>
+                                        <c:forEach var="item" items="${uApp.items}">
+                                            ID ${item.id} | ${item.dimX} x ${item.dimX} x ${item.dimX} mm | ${item.weight} kg
+                                            <br>
+                                        </c:forEach>
                                     </td>
                                 </tr>
                                 <tr>
@@ -54,7 +68,7 @@
                             </table>
                         </td>
                         <td>
-                            <button class="statusbtn" onclick="req(${driverId}, ${route.id}, ${aApp.id}, this)">${aApp.status.statusName}</button>
+                            <div class="status"><b>${aApp.status.statusName}</b></div>
                         </td>
                     </tr>
                 </c:forEach>
@@ -112,7 +126,7 @@
                 </c:forEach>
             </table>
             <br>
-            <button class="button" onclick="document.location='<c:url value="/driver/${driverId}/main"/>'">Back</button>
+            <button class="button" onclick="document.location='<c:url value="/manager/${managerId}/routes"/>'">To all routes</button>
         </div>
         <br>
 <%@include file="../common/footer.jsp"%>

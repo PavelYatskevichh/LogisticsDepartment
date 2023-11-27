@@ -2,11 +2,7 @@ package com.academy.logistics_department.controller;
 
 import com.academy.logistics_department.dto.ApplicationDto;
 import com.academy.logistics_department.dto.RouteDto;
-import com.academy.logistics_department.dto.UserDto;
-import com.academy.logistics_department.mappers.UserMapper;
-import com.academy.logistics_department.model.entity.User;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
-import com.academy.logistics_department.model.repository.UserRepository;
 import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.RouteService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,7 +24,7 @@ public class DriverController {
         RouteDto currentRouteDto = routeService.getDriversCurrentRoute(driverId);
         model.addAttribute("currentRoute", currentRouteDto);
 
-        List<RouteDto> completedRoutesDto = routeService.getDriversAllCompletedRoutes(driverId);
+        List<RouteDto> completedRoutesDto = routeService.getAllDriversCompletedRoutes(driverId);
         model.addAttribute("completedRoutes", completedRoutesDto);
 
         model.addAttribute("driverId", driverId);
@@ -39,23 +34,10 @@ public class DriverController {
 
     @GetMapping(value = "/route")
     public String getRoute(@PathVariable Integer driverId, @RequestParam Integer id, Model model) {
-        RouteDto routeDto = routeService.getRouteById(driverId, id);
-        model.addAttribute("route", routeDto);
+        RouteDto currentRouteDto = routeService.getDriversCurrentRoute(driverId);
+        model.addAttribute("currentRoute", currentRouteDto);
 
-        List<ApplicationDto> activeApplicationsDto = applicationService.getAllActiveDriversApplications(routeDto);
-        model.addAttribute("activeApplications", activeApplicationsDto);
-
-        List<ApplicationDto> deliveredApplicationsDto = applicationService.getAllDeliveredDriversApplications(routeDto);
-        model.addAttribute("deliveredApplications", deliveredApplicationsDto);
-
-        model.addAttribute("driverId", driverId);
-
-        return "driver/route";
-    }
-
-    @GetMapping(value = "/current")
-    public String getCurrent(@PathVariable Integer driverId, Model model) {
-        RouteDto routeDto = routeService.getDriversCurrentRoute(driverId);
+        RouteDto routeDto = routeService.getDriversRouteById(driverId, id);
         model.addAttribute("route", routeDto);
 
         List<ApplicationDto> activeApplicationsDto = applicationService.getAllActiveDriversApplications(routeDto);
@@ -75,7 +57,7 @@ public class DriverController {
     public String changeStatus(@PathVariable Integer driverId,
                                @RequestParam Integer routeId,
                                @RequestParam Integer applicationId) {
-        RouteDto routeDto = routeService.getRouteById(driverId, routeId);
+        RouteDto routeDto = routeService.getDriversRouteById(driverId, routeId);
         ApplicationStatusEnum applicationStatusEnum = applicationService.changeApplicationStatus(routeDto, applicationId);
 
         return applicationStatusEnum.name();

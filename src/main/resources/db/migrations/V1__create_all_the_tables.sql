@@ -74,7 +74,7 @@ create table route(
 
 create table application(
 	id integer auto_increment not null,
-    route_id integer not null,
+    route_id integer,
     loading_address_id integer not null,
     unloading_address_id integer not null,
     customer_id integer not null,
@@ -90,6 +90,7 @@ create table application(
 create table item(
 	id integer auto_increment not null,
 	application_id integer not null,
+	item_name varchar(256),
     weight integer not null,
     dim_X integer not null,
     dim_Y integer not null,

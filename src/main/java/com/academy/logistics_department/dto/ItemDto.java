@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemDto {
     private Integer id;
+    private String name;
     private Integer weight;
     private Integer dimX;
     private Integer dimY;

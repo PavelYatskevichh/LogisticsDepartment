@@ -10,7 +10,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "spring", uses = RoleMapper.class)
 public interface UserMapper {
     UserDto toDto(User user);
-//    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "password", ignore = true)
     User toModel(UserDto userDto);
+    @Mapping(target = "password", ignore = true)
     void updateModel(UserDto userDto, @MappingTarget User user);
 }

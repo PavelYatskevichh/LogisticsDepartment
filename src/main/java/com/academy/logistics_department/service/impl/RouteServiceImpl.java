@@ -22,7 +22,7 @@ public class RouteServiceImpl implements RouteService {
     private final RouteMapper routeMapper;
 
     @Override
-    public List<RouteDto> getDriversAllCompletedRoutes(Integer driverId) {
+    public List<RouteDto> getAllDriversCompletedRoutes(Integer driverId) {
         List<Route> routeList = routeRepository.findAllRoutesByDriverId(driverId);
         List<RouteDto> result = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public RouteDto getRouteById(Integer driverId, Integer routeId) {
+    public RouteDto getDriversRouteById(Integer driverId, Integer routeId) {
         Route route = routeRepository.getReferenceById(routeId);
         List<Route> routes = routeRepository.findAllRoutesByDriverId(driverId);
         if (routes.contains(route)) {
@@ -57,6 +57,11 @@ public class RouteServiceImpl implements RouteService {
         } else {
             throw new RuntimeException("The driver (id = " + driverId + ") doesn't have such route (id = " + routeId + ").");
         }
+    }
+
+    @Override
+    public RouteDto getRouteById(Integer routeId) {
+        return routeMapper.toDto(routeRepository.getReferenceById(routeId));
     }
 
     @Override
@@ -70,5 +75,23 @@ public class RouteServiceImpl implements RouteService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<RouteDto> getAllActiveRoutes() {
+        List<Route> routes = routeRepository.findAll();
+        return routes.stream()
+                .map(routeMapper::toDto)
+                .filter(r -> r.getStatus() == RouteStatusEnum.CURRENT)
+                .toList();
+    }
+
+    @Override
+    public List<RouteDto> getAllCompletedRoutes() {
+        List<Route> routes = routeRepository.findAll();
+        return routes.stream()
+                .map(routeMapper::toDto)
+                .filter(r -> r.getStatus() == RouteStatusEnum.COMPLETED)
+                .toList();
     }
 }
