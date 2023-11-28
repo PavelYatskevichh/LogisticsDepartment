@@ -2,6 +2,10 @@
         <div class="content">
             <div class="title-container">
                 <div id="special-title" class="title">Route ID: ${route.id}</div>
+                <div>
+                    Manager: ${route.manager.firstName} ${route.manager.lastName}
+                    <a href="tel:${route.manager.phoneNumber}">${route.manager.phoneNumber}</a>
+                </div>
             </div>
 
             <div class="title-container">
@@ -34,7 +38,7 @@
                                         Items:
                                     </td>
                                     <td class="holder">
-                                        <c:forEach var="item" items="${uApp.items}">
+                                        <c:forEach var="item" items="${aApp.items}">
                                             ID ${item.id} | ${item.dimX} x ${item.dimX} x ${item.dimX} mm | ${item.weight} kg
                                             <br>
                                         </c:forEach>
@@ -126,7 +130,7 @@
                 </c:forEach>
             </table>
             <br>
-            <button class="button" onclick="document.location='<c:url value="/manager/${managerId}/routes"/>'">To all routes</button>
+            <button class="button" onclick="document.location='<c:url value="/manager/${managerId}/routes"/>'">Back</button>
         </div>
         <br>
 <%@include file="../common/footer.jsp"%>

@@ -46,6 +46,10 @@ body {
     color: white;
 }
 
+.deletebtn:hover {
+    background-color: red !important;
+}
+
 .gradient {
 	background: linear-gradient(rgb(240, 240, 240, 0.8), white);
 	height: 30px;
@@ -73,6 +77,7 @@ body {
     font-weight: 600;
     font-size: 20px;
     margin: 0px 5px;
+    margin-bottom: 6px;
 }
 
 .active {
@@ -179,4 +184,21 @@ footer {
 .footer-contacts div a {
     color: rgb(120, 120, 120, 1.0);
     text-decoration: none;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+}
+
+.input {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: medium;
+    width: 200px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
 }

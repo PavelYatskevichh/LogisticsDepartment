@@ -23,8 +23,10 @@ public interface RouteMapper {
 
         if (applications.stream().allMatch(a -> a.getStatus().getStatusName().equals(ApplicationStatusEnum.DELIVERED))) {
             return RouteStatusEnum.COMPLETED;
-        } else {
+        } else if (applications.stream().noneMatch(a -> a.getStatus().getStatusName().equals(ApplicationStatusEnum.PROCESSING))) {
             return RouteStatusEnum.CURRENT;
+        } else {
+            return null;
         }
     }
 }

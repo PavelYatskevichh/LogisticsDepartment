@@ -1,4 +1,4 @@
-function req(driverId, routeId, applicationId, tag) {
+function req(driverId, routeId, applicationId) {
 
     let xhr = new XMLHttpRequest();
 

@@ -1,35 +1,79 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix ="c" uri="jakarta.tags.core" %>
+<%@include file="../common/customerHeader.jsp"%>
+        <div id="content" class="content">
 
-<html>
-    <head>
-        <title>Create application</title>
-    </head>
-    <body>
-        <form action="<c:url value="/customer/createApplication"/>">
-            Item 1 details:
-            <table class="create_application">
-                <tr><td><label> Length: </label></td><td><input name="dimX">mm</td></tr>
-                <tr><td><label> Width: </label></td><td><input name="dimY">mm</td></tr>
-                <tr><td><label> Height: </label></td><td><input name="dimZ">mm</td></tr>
-                <tr><td><label> Weight: </label></td><td><input name="weight">kg</td></tr>
-                <tr><td></td><td><button>+ Another item</button></td></tr>
-            </table>
-            Loading address:
-            <table class="create_application">
-                <tr><td><label> City: </label></td><td><input name="loadCity"></td></tr>
-                <tr><td><label> Street: </label></td><td><input name="loadStreet"></td></tr>
-                <tr><td><label> Building: </label></td><td><input name="loadBuilding"></td></tr>
-            </table>
-            Unloading address:
-            <table class="create_application">
-                <tr><td><label> City: </label></td><td><input name="unloadCity"></td></tr>
-                <tr><td><label> Street: </label></td><td><input name="unloadStreet"></td></tr>
-                <tr><td><label> Building: </label></td><td><input name="unloadBuilding"></td></tr>
-            </table>
-            <input type="submit" value="Create application">
-            <input type="submit" value="Clear">
-            <input type="submit" value="Cancel">
-        </form>
-    </body>
-</html>
+            <c:url value="/customer/${customerId}/createApplication" var="createApplicationUrl" />
+
+            <f:form id="itemForm1" method="post" action="${createApplicationUrl}" modelAttribute="createItem">
+                <table>
+                    <div class="title-container">
+                        <div class="title">Item details:</div>
+                        <div><input type="button" class="statusbtn deletebtn" value="Delete item"></div>
+                    </div>
+
+                    <tr>
+                        <td><f:label class="label" path="name"> Item name: </f:label></td>
+                        <td><f:input class="input" path="name"></f:input></td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="dimX"> Length: </f:label></td>
+                        <td><f:input class="input" path="dimX"></f:input> mm</td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="dimY"> Width: </f:label></td>
+                        <td><f:input class="input" path="dimY"></f:input> mm</td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="dimZ"> Height: </f:label></td>
+                        <td><f:input class="input" path="dimZ"></f:input> mm</td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="weight"> Weight: </f:label></td>
+                        <td><f:input class="input" path="weight"></f:input> kg</td>
+                    </tr>
+                </table>
+            </f:form>
+
+            <input id="addItem" type="button" class="statusbtn" value="Add another item">
+
+            <f:form id="loadAdrForm" method="post" action="${createApplicationUrl}" modelAttribute="createLoadAddress">
+                <table>
+                    <div class="title">Loading address:</div>
+                    <tr>
+                        <td><f:label class="label" path="city"> City: </f:label></td>
+                        <td><f:input class="input" path="city"></f:input></td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="street"> Street: </f:label></td>
+                        <td><f:input class="input" path="street"></f:input></td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="building"> Building: </f:label></td>
+                        <td><f:input class="input" path="building"></f:input></td>
+                    </tr>
+                </table>
+            </f:form>
+
+            <f:form id="unloadAdrForm" method="post" action="${createApplicationUrl}" modelAttribute="createUnloadAddress">
+                <table>
+                    <div class="title">Unloading address:</div>
+                    <tr>
+                        <td><f:label class="label" path="city"> City: </f:label></td>
+                        <td><f:input class="input" path="city"></f:input></td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="street"> Street: </f:label></td>
+                        <td><f:input class="input" path="street"></f:input></td>
+                    </tr>
+                    <tr>
+                        <td><f:label class="label" path="building"> Building: </f:label></td>
+                        <td><f:input class="input" path="building"></f:input></td>
+                    </tr>
+                </table>
+            </f:form>
+
+            <input type="submit" class="button" value="Create">
+            <input type="reset" class="button" value="Reset">
+            <input type="button" class="button" onclick="document.location='<c:url value="/customer/${customerId}/main"/>'" value="Back">
+
+        </div>
+<%@include file="../common/footer.jsp"%>

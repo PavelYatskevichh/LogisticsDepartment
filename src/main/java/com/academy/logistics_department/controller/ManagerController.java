@@ -32,6 +32,9 @@ public class ManagerController {
         List<RouteDto> activeRoutesDto = routeService.getAllActiveRoutes();
         model.addAttribute("activeRoutes", activeRoutesDto);
 
+        Integer numberOfUnallocated = applicationService.countAllUnallocatedApplications();
+        model.addAttribute("numberOfUnallocated", numberOfUnallocated);
+
         return "manager/main";
     }
 

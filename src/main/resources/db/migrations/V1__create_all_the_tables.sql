@@ -89,7 +89,7 @@ create table application(
 
 create table item(
 	id integer auto_increment not null,
-	application_id integer not null,
+	application_id integer,
 	item_name varchar(256),
     weight integer not null,
     dim_X integer not null,

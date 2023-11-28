@@ -29,8 +29,8 @@ values
 insert into vehicle(vehicle_name, max_load_capacity, max_trip_distance, dim_X_restriction, dim_Y_restriction,
     dim_Z_restriction, required_category_id)
 values
-    ('Volksvagen Crafter', 2000, 800, 4800, 1800, 2000, 4),
-    ('Volksvagen Caddy', 600, 1000, 2000, 1300, 1200, 2),
+    ('Volkswagen Crafter', 2000, 800, 4800, 1800, 2000, 4),
+    ('Volkswagen Caddy', 600, 1000, 2000, 1300, 1200, 2),
     ('Scania R460', 19000, 3000, 13600, 2450, 2600, 5),
     ('ГАЗ Next', 1700, 800, 4200, 1800, 1900, 4);
 
@@ -64,31 +64,31 @@ values
 
 insert into application(route_id, loading_address_id, unloading_address_id, status_id, customer_id)
 values
-    (2, 1, 2, 1, 6),
-    (2, 3, 4, 1, 8),
-    (2, 11, 13, 1, 9),
-    (2, 12, 14, 1, 10),
+    (2, 1, 2, 2, 6),
+    (2, 3, 4, 2, 8),
+    (2, 11, 13, 2, 9),
+    (2, 12, 14, 2, 10),
     (1, 8, 5, 2, 11),
     (1, 9, 10, 2, 12),
     (1, 15, 18, 3, 13),
     (1, 19, 18, 4, 13),
-    (3, 6, 17, 1, 7),
-    (3, 7, 17, 1, 7),
-    (3, 16, 17, 1, 7);
+    (3, 6, 17, 2, 7),
+    (3, 7, 17, 2, 7),
+    (3, 16, 17, 2, 7);
 
 insert into item(application_id, item_name, weight, dim_X, dim_Y, dim_Z)
 values
     (1, "Sports mat", 3, 500, 100, 100),
     (3, "Postmodern painting", 1, 600, 30, 400),
+    (3, "Armchair Rococo", 30, 800, 700, 800),
     (9, "Reinforcement", 13000, 12000, 1200, 600),
     (10, "Wardrobe Monblan", 80, 2400, 1000, 2000),
-    (11, "Armchair Rococo", 500, 1100, 1000, 1200),
+    (11, "Cement", 500, 1100, 1000, 1200),
     (7, "Nike SB Low", 2, 400, 250, 100),
     (8, "AirJordan 36", 3, 380, 220, 100);
 
 insert into item(application_id, weight, dim_X, dim_Y, dim_Z)
 values
-    (3, 30, 800, 700, 800),
     (2, 20, 600, 400, 200),
     (4, 3, 200, 150, 150),
     (5, 2, 300, 300, 100),

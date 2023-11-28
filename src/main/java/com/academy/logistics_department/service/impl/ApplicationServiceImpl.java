@@ -1,19 +1,26 @@
 package com.academy.logistics_department.service.impl;
 
+import com.academy.logistics_department.dto.AddressDto;
 import com.academy.logistics_department.dto.ApplicationDto;
+import com.academy.logistics_department.dto.ItemDto;
 import com.academy.logistics_department.dto.RouteDto;
+import com.academy.logistics_department.mappers.AddressMapper;
 import com.academy.logistics_department.mappers.ApplicationMapper;
+import com.academy.logistics_department.mappers.ItemMapper;
 import com.academy.logistics_department.model.entity.Application;
 import com.academy.logistics_department.model.entity.ApplicationStatus;
-import com.academy.logistics_department.model.entity.Route;
+import com.academy.logistics_department.model.entity.Item;
+import com.academy.logistics_department.model.entity.User;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
 import com.academy.logistics_department.model.repository.ApplicationRepository;
 import com.academy.logistics_department.model.repository.ApplicationStatusRepository;
+import com.academy.logistics_department.model.repository.UserRepository;
 import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.RouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +30,10 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final ApplicationMapper applicationMapper;
     private final ApplicationStatusRepository applicationStatusRepository;
+    private final ItemMapper itemMapper;
+    private final AddressMapper addressMapper;
+    private final UserRepository userRepository;
+    private final Integer PROCESSING_STATUS_ID = 1;
 
     @Override
     public List<ApplicationDto> getAllActiveCustomersApplications(Integer customerId) {
@@ -43,8 +54,21 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public void createApplication(Application application) {
+    public void saveApplication(Integer customerId, AddressDto loadAddressDro, AddressDto unloadAddressDro, ItemDto... itemDtos) {
+        List<Item> items = new ArrayList<>();
+        for (ItemDto itemDto : itemDtos) {
+            items.add(itemMapper.toModel(itemDto));
+        }
 
+        Application application = Application.builder()
+                .customer(userRepository.getReferenceById(customerId))
+                .loadingAddress(addressMapper.toModel(loadAddressDro))
+                .unloadingAddress(addressMapper.toModel(unloadAddressDro))
+                .items(items)
+                .status(applicationStatusRepository.getReferenceById(PROCESSING_STATUS_ID))
+                .build();
+
+        applicationRepository.save(application);
     }
 
     @Override
@@ -70,6 +94,11 @@ public class ApplicationServiceImpl implements ApplicationService {
                 .filter(a -> a.getStatus().getStatusName() == ApplicationStatusEnum.PROCESSING)
                 .map(applicationMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public Integer countAllUnallocatedApplications() {
+        return getAllUnallocatedApplications().size();
     }
 
     @Override

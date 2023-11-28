@@ -1,15 +1,23 @@
 package com.academy.logistics_department.controller;
 
+import com.academy.logistics_department.dto.AddressDto;
 import com.academy.logistics_department.dto.ApplicationDto;
+import com.academy.logistics_department.dto.ItemDto;
+import com.academy.logistics_department.mappers.AddressMapper;
+import com.academy.logistics_department.mappers.ItemMapper;
+import com.academy.logistics_department.mappers.UserMapper;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
+import com.academy.logistics_department.model.repository.AddressRepository;
+import com.academy.logistics_department.model.repository.ItemRepository;
+import com.academy.logistics_department.model.repository.UserRepository;
+import com.academy.logistics_department.service.AddressService;
 import com.academy.logistics_department.service.ApplicationService;
+import com.academy.logistics_department.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -18,6 +26,12 @@ import java.util.List;
 @RequestMapping(value = "/customer/{customerId}")
 public class CustomerController {
     private final ApplicationService applicationService;
+    private final ItemService itemService;
+    private final AddressService addressService;
+    private final ItemRepository itemRepository;
+    private final AddressRepository addressRepository;
+    private final ItemMapper itemMapper;
+    private final AddressMapper addressMapper;
 
     @GetMapping(value = "/main")
     public String getMain(@PathVariable Integer customerId, Model model) {
@@ -41,5 +55,25 @@ public class CustomerController {
         model.addAttribute("DELIVERED", ApplicationStatusEnum.DELIVERED);
 
         return "customer/application";
+    }
+
+    @GetMapping(value = "/showCreateApplication")
+    public String showCreateApplication(@PathVariable Integer customerId, Model model) {
+        model.addAttribute("createItem", new ItemDto());
+        model.addAttribute("createLoadAddress", new AddressDto());
+        model.addAttribute("createUnloadAddress", new AddressDto());
+
+        return "customer/createApplication";
+    }
+
+    @PostMapping(value = "/createApplication")
+    public String createApplication(@PathVariable Integer customerId,
+                                    @ModelAttribute("createLoadAddress") AddressDto loadAddressDto,
+                                    @ModelAttribute("createUnloadAddress") AddressDto unloadAddressDto,
+                                    @ModelAttribute("createItem") ItemDto itemDto) {
+
+        applicationService.saveApplication(customerId, loadAddressDto, unloadAddressDto, itemDto);
+
+        return "redirect:main";
     }
 }
