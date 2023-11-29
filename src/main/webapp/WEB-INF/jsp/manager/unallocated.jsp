@@ -16,7 +16,7 @@
                                     </td>
                                     <td class="holder">
                                         <c:forEach var="item" items="${uApp.items}">
-                                            ID ${item.id} | ${item.dimX} x ${item.dimX} x ${item.dimX} mm | ${item.weight} kg
+                                            ID ${item.id} | ${item.dimX} x ${item.dimY} x ${item.dimZ} mm | ${item.weight} kg
                                             <br>
                                         </c:forEach>
                                     </td>
@@ -50,6 +50,14 @@
                         </td>
                         <td>
                             <div class="status"><b>${uApp.status.statusName}</b></div>
+                        </td>
+                        <td>
+                            <button class="statusbtn"
+                            onclick="document.location='<c:url value="/manager/${managerId}/showEditApplication?applicationId=${uApp.id}"/>'">
+                            Edit</button>
+                            <button class="statusbtn deletebtn"
+                            onclick="document.location='<c:url value="/manager/${managerId}/deleteApplication?applicationId=${uApp.id}"/>'">
+                            Delete</button>
                         </td>
                     </tr>
                 </c:forEach>

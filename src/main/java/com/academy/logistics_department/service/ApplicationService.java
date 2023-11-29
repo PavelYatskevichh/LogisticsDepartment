@@ -15,8 +15,10 @@ public interface ApplicationService {
     List<ApplicationDto> getAllActiveCustomersApplications(Integer customerId);
     List<ApplicationDto> getAllDeliveredCustomersApplications(Integer customerId);
     void saveApplication(Integer customerId, AddressDto loadAddressDro, AddressDto unloadAddressDro, ItemDto... itemDtos);
-    void changeApplication(Integer id);
+    void editApplication(Integer applicationId, AddressDto loadAddressDro, AddressDto unloadAddressDro, ItemDto... itemDtos);
+    void deleteApplication(Integer applicationId);
     ApplicationDto getCustomersApplicationDto(Integer customerId, Integer applicationId);
+    ApplicationDto getApplicationDto(Integer applicationId);
     List<ApplicationDto> getAllUnallocatedApplications();
     Integer countAllUnallocatedApplications();
 }

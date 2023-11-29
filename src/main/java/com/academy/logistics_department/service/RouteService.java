@@ -9,7 +9,8 @@ public interface RouteService {
     RouteDto getDriversCurrentRoute(Integer driverId);
     RouteDto getDriversRouteById(Integer driverId, Integer routeId);
     RouteDto getRouteById(Integer routeId);
-    boolean completeRoute(RouteDto routeDto);
+    void completeRoute(RouteDto routeDto);
     List<RouteDto> getAllActiveRoutes();
     List<RouteDto> getAllCompletedRoutes();
+    void saveRoute(Integer managerId, Integer driverId, Integer vehicleId, Integer... applicationIds);
 }

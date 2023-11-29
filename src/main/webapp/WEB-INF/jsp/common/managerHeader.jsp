@@ -24,7 +24,7 @@
                 <a href='<c:url value="/manager/${managerId}/unallocated"/>'>Unallocated</a>
             </div>
             <div>
-                <a href='<c:url value="/manager/${managerId}/create"/>'>Create route</a>
+                <a href='<c:url value="/manager/${managerId}/showCreateRoute"/>'>Create route</a>
             </div>
             <div>
                 <a href='<c:url value="/manager/${managerId}/routes"/>'>Routes</a>

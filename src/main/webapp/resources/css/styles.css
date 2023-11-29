@@ -202,3 +202,8 @@ footer {
     border: 1px solid #ddd;
     border-radius: 6px;
 }
+
+#appForm {
+    display: flex;
+    flex-direction: column;
+}

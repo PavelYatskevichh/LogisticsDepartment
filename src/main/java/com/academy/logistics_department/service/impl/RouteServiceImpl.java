@@ -4,10 +4,11 @@ import com.academy.logistics_department.dto.ApplicationDto;
 import com.academy.logistics_department.dto.RouteDto;
 import com.academy.logistics_department.mappers.RouteMapper;
 import com.academy.logistics_department.model.entity.Application;
+import com.academy.logistics_department.model.entity.ApplicationStatus;
 import com.academy.logistics_department.model.entity.Route;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
 import com.academy.logistics_department.model.enums.RouteStatusEnum;
-import com.academy.logistics_department.model.repository.RouteRepository;
+import com.academy.logistics_department.model.repository.*;
 import com.academy.logistics_department.service.RouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ import java.util.List;
 public class RouteServiceImpl implements RouteService {
     private final RouteRepository routeRepository;
     private final RouteMapper routeMapper;
+    private final UserRepository userRepository;
+    private final VehicleRepository vehicleRepository;
+    private final ApplicationRepository applicationRepository;
+    private final ApplicationStatusRepository applicationStatusRepository;
+    private final Integer WAITING_FOR_LOAD_STATUS_ID = 2;
 
     @Override
     public List<RouteDto> getAllDriversCompletedRoutes(Integer driverId) {
@@ -65,15 +71,12 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public boolean completeRoute(RouteDto routeDto) {
+    public void completeRoute(RouteDto routeDto) {
         List<ApplicationDto> applications = routeDto.getApplications();
 
         if (applications.stream().allMatch(a -> a.getStatus().getStatusName().equals(ApplicationStatusEnum.DELIVERED))) {
             RouteStatusEnum newRouteStatus = RouteStatusEnum.COMPLETED;
             routeDto.setStatus(newRouteStatus);
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -93,5 +96,25 @@ public class RouteServiceImpl implements RouteService {
                 .map(routeMapper::toDto)
                 .filter(r -> r.getStatus() == RouteStatusEnum.COMPLETED)
                 .toList();
+    }
+
+    @Override
+    public void saveRoute(Integer managerId, Integer driverId, Integer vehicleId, Integer... applicationIds) {
+        List<Application> applications = new ArrayList<>();
+        ApplicationStatus applicationStatus = applicationStatusRepository.getReferenceById(WAITING_FOR_LOAD_STATUS_ID);
+        for (Integer applicationId : applicationIds) {
+            Application application = applicationRepository.getReferenceById(applicationId);
+            application.setStatus(applicationStatus);
+            applications.add(application);
+        }
+
+        Route route = Route.builder()
+                .manager(userRepository.getReferenceById(managerId))
+                .driver(userRepository.getReferenceById(driverId))
+                .vehicle(vehicleRepository.getReferenceById(vehicleId))
+                .applications(applications)
+                .build();
+
+        routeRepository.save(route);
     }
 }

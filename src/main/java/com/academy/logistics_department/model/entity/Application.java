@@ -27,10 +27,10 @@ public class Application {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "unloading_address_id")
     private Address unloadingAddress;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "customer_id")
     private User customer;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "status_id")
     private ApplicationStatus status;
 }

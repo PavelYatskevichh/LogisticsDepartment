@@ -11,7 +11,6 @@
                 </c:if>
             </div>
 
-
             <div class="title">Application details:</div>
 
             <table>
@@ -22,7 +21,7 @@
                                 <c:forEach var="item" items="${application.items}">
                                     Name: ${item.name}
                                     <br>
-                                    Dimensions: ${item.dimX} x ${item.dimX} x ${item.dimX} mm
+                                    Dimensions: ${item.dimX} x ${item.dimY} x ${item.dimZ} mm
                                     <br>
                                     Weight: ${item.weight} kg
                                 </c:forEach>

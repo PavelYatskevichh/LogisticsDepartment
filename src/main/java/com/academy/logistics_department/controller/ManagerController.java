@@ -1,20 +1,11 @@
 package com.academy.logistics_department.controller;
 
-import com.academy.logistics_department.dto.ApplicationDto;
-import com.academy.logistics_department.dto.DriverDto;
-import com.academy.logistics_department.dto.RouteDto;
-import com.academy.logistics_department.dto.VehicleDto;
-import com.academy.logistics_department.service.ApplicationService;
-import com.academy.logistics_department.service.RouteService;
-import com.academy.logistics_department.service.UserService;
-import com.academy.logistics_department.service.VehicleService;
+import com.academy.logistics_department.dto.*;
+import com.academy.logistics_department.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +17,8 @@ public class ManagerController {
     private final RouteService routeService;
     private final VehicleService vehicleService;
     private final UserService userService;
+    private final AddressService addressService;
+    private final ItemService itemService;
 
     @GetMapping(value = "/main")
     public String getMain(@PathVariable Integer managerId, Model model) {
@@ -87,5 +80,63 @@ public class ManagerController {
         model.addAttribute("drivers", driverDtoList);
 
         return "manager/drivers";
+    }
+
+    @GetMapping(value = "/showCreateRoute")
+    public String showCreateRoute(@PathVariable Integer managerId) {
+
+        return "manager/createRoute";
+    }
+
+    @PostMapping(value = "/createRoute")
+    public String createRoute(@PathVariable Integer managerId,
+                              @RequestParam Integer driverId,
+                              @RequestParam Integer vehicleId,
+                              @RequestParam("applicationId") Integer... applicationIds) {
+        routeService.saveRoute(managerId, driverId, vehicleId, applicationIds);
+
+        return "redirect:main";
+    }
+
+    @GetMapping(value = "/showEditApplication")
+    public String showEditApplication(@PathVariable Integer managerId,
+                                      @RequestParam Integer applicationId, Model model) {
+        ApplicationDto applicationDto = applicationService.getApplicationDto(applicationId);
+        model.addAttribute("application", applicationDto);
+
+        model.addAttribute("managerId", managerId);
+
+        return "manager/editApplication";
+    }
+
+    @PostMapping(value = "/editApplication")
+    public String editApplication(@PathVariable Integer managerId,
+                                  @RequestParam Integer applicationId,
+                                  @RequestParam String name,
+                                  @RequestParam Integer dimX,
+                                  @RequestParam Integer dimY,
+                                  @RequestParam Integer dimZ,
+                                  @RequestParam Integer weight,
+                                  @RequestParam String loadCity,
+                                  @RequestParam String loadStreet,
+                                  @RequestParam String loadBuilding,
+                                  @RequestParam String unloadCity,
+                                  @RequestParam String unloadStreet,
+                                  @RequestParam String unloadBuilding) {
+        AddressDto loadAddressDto = addressService.createAddress(loadCity, loadStreet, loadBuilding);
+        AddressDto unloadAddressDto = addressService.createAddress(unloadCity, unloadStreet, unloadBuilding);
+        ItemDto itemDto1 = itemService.createItem(name, dimX, dimY, dimZ, weight);
+
+        applicationService.editApplication(applicationId, loadAddressDto, unloadAddressDto, itemDto1);
+
+        return "redirect:unallocated";
+    }
+
+    @GetMapping(value = "/deleteApplication")
+    public String deleteApplication(@PathVariable Integer managerId,
+                                    @RequestParam Integer applicationId) {
+        applicationService.deleteApplication(applicationId);
+
+        return "redirect:unallocated";
     }
 }

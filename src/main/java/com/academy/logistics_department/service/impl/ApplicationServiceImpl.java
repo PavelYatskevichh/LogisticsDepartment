@@ -7,14 +7,12 @@ import com.academy.logistics_department.dto.RouteDto;
 import com.academy.logistics_department.mappers.AddressMapper;
 import com.academy.logistics_department.mappers.ApplicationMapper;
 import com.academy.logistics_department.mappers.ItemMapper;
+import com.academy.logistics_department.model.entity.Address;
 import com.academy.logistics_department.model.entity.Application;
 import com.academy.logistics_department.model.entity.ApplicationStatus;
 import com.academy.logistics_department.model.entity.Item;
-import com.academy.logistics_department.model.entity.User;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
-import com.academy.logistics_department.model.repository.ApplicationRepository;
-import com.academy.logistics_department.model.repository.ApplicationStatusRepository;
-import com.academy.logistics_department.model.repository.UserRepository;
+import com.academy.logistics_department.model.repository.*;
 import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.RouteService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +31,8 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final ItemMapper itemMapper;
     private final AddressMapper addressMapper;
     private final UserRepository userRepository;
+    private final ItemRepository itemRepository;
+    private final AddressRepository addressRepository;
     private final Integer PROCESSING_STATUS_ID = 1;
 
     @Override
@@ -71,9 +71,36 @@ public class ApplicationServiceImpl implements ApplicationService {
         applicationRepository.save(application);
     }
 
+    // NOT READY!
     @Override
-    public void changeApplication(Integer id) {
+    public void editApplication(Integer applicationId, AddressDto loadAddressDro, AddressDto unloadAddressDro, ItemDto... itemDtos) {
+        Application application = applicationRepository.getReferenceById(applicationId);
+        Item item = itemRepository.getReferenceById(application.getItems().stream().findFirst().get().getId());
+        item.setName(itemDtos[0].getName());
+        item.setWeight(itemDtos[0].getWeight());
+        item.setDimX(itemDtos[0].getDimX());
+        item.setDimY(itemDtos[0].getDimY());
+        item.setDimZ(itemDtos[0].getDimZ());
+        List<Item> items = new ArrayList<>();
+        items.add(item);
+        Address loadingAddress = addressRepository.getReferenceById(application.getLoadingAddress().getId());
+        loadingAddress.setCity(loadAddressDro.getCity());
+        loadingAddress.setStreet(loadAddressDro.getStreet());
+        loadingAddress.setBuilding(loadAddressDro.getBuilding());
+        Address unloadingAddress = addressRepository.getReferenceById(application.getUnloadingAddress().getId());
+        unloadingAddress.setCity(unloadAddressDro.getCity());
+        unloadingAddress.setStreet(unloadAddressDro.getStreet());
+        unloadingAddress.setBuilding(unloadAddressDro.getBuilding());
 
+        application.setItems(items);
+        application.setLoadingAddress(loadingAddress);
+        application.setUnloadingAddress(unloadingAddress);
+        applicationRepository.save(application);
+    }
+
+    @Override
+    public void deleteApplication(Integer id) {
+        applicationRepository.deleteById(id);
     }
 
     @Override
@@ -85,6 +112,11 @@ public class ApplicationServiceImpl implements ApplicationService {
         } else {
             throw new RuntimeException("The driver (id = " + customerId + ") doesn't have such route (id = " + applicationId + ").");
         }
+    }
+
+    @Override
+    public ApplicationDto getApplicationDto(Integer applicationId) {
+        return applicationMapper.toDto(applicationRepository.getReferenceById(applicationId));
     }
 
     @Override

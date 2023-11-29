@@ -1,18 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('*[data-href]').forEach(function(element) {
-        element.addEventListener('click', function() {
-            window.location.href = this.getAttribute('data-href');
-        });
-    });
-});
+function add() {
+var appForm = document.getElementById('appForm');
+    var newField = document.createElement('input');
+    newField.setAttribute('name','applicationId');
+    newField.setAttribute('class','input');
+    appForm.appendChild(newField);
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('*[data-href]').forEach(function(element) {
-        element.addEventListener('mouseover', function() {
-            this.style.backgroundColor = '#ddd';
-        });
-        element.addEventListener('mouseout', function() {
-            this.style.backgroundColor = 'white';
-        });
-    });
-});
+function remove(){
+    var inputTags = appForm.getElementsByTagName('input');
+    if(inputTags.length > 0) {
+        appForm.removeChild(inputTags[(inputTags.length) - 1]);
+    }
+}

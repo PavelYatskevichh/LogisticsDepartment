@@ -54,7 +54,7 @@
                             </table>
                         </td>
                         <td>
-                            <button class="statusbtn" onclick="req(${driverId}, ${route.id}, ${aApp.id})">${aApp.status.statusName}</button>
+                            <button class="statusbtn" onclick="updateStatus(${driverId}, ${route.id}, ${aApp.id}, this)">${aApp.status.statusName}</button>
                         </td>
                     </tr>
                 </c:forEach>

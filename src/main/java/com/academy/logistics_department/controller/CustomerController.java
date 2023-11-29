@@ -3,13 +3,7 @@ package com.academy.logistics_department.controller;
 import com.academy.logistics_department.dto.AddressDto;
 import com.academy.logistics_department.dto.ApplicationDto;
 import com.academy.logistics_department.dto.ItemDto;
-import com.academy.logistics_department.mappers.AddressMapper;
-import com.academy.logistics_department.mappers.ItemMapper;
-import com.academy.logistics_department.mappers.UserMapper;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
-import com.academy.logistics_department.model.repository.AddressRepository;
-import com.academy.logistics_department.model.repository.ItemRepository;
-import com.academy.logistics_department.model.repository.UserRepository;
 import com.academy.logistics_department.service.AddressService;
 import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.ItemService;
@@ -17,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -28,10 +21,6 @@ public class CustomerController {
     private final ApplicationService applicationService;
     private final ItemService itemService;
     private final AddressService addressService;
-    private final ItemRepository itemRepository;
-    private final AddressRepository addressRepository;
-    private final ItemMapper itemMapper;
-    private final AddressMapper addressMapper;
 
     @GetMapping(value = "/main")
     public String getMain(@PathVariable Integer customerId, Model model) {
@@ -58,21 +47,29 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/showCreateApplication")
-    public String showCreateApplication(@PathVariable Integer customerId, Model model) {
-        model.addAttribute("createItem", new ItemDto());
-        model.addAttribute("createLoadAddress", new AddressDto());
-        model.addAttribute("createUnloadAddress", new AddressDto());
+    public String showCreateApplication(@PathVariable Integer customerId) {
 
         return "customer/createApplication";
     }
 
     @PostMapping(value = "/createApplication")
     public String createApplication(@PathVariable Integer customerId,
-                                    @ModelAttribute("createLoadAddress") AddressDto loadAddressDto,
-                                    @ModelAttribute("createUnloadAddress") AddressDto unloadAddressDto,
-                                    @ModelAttribute("createItem") ItemDto itemDto) {
+                                    @RequestParam String name,
+                                    @RequestParam Integer dimX,
+                                    @RequestParam Integer dimY,
+                                    @RequestParam Integer dimZ,
+                                    @RequestParam Integer weight,
+                                    @RequestParam String loadCity,
+                                    @RequestParam String loadStreet,
+                                    @RequestParam String loadBuilding,
+                                    @RequestParam String unloadCity,
+                                    @RequestParam String unloadStreet,
+                                    @RequestParam String unloadBuilding) {
+        AddressDto loadAddressDto = addressService.createAddress(loadCity, loadStreet, loadBuilding);
+        AddressDto unloadAddressDto = addressService.createAddress(unloadCity, unloadStreet, unloadBuilding);
+        ItemDto itemDto1 = itemService.createItem(name, dimX, dimY, dimZ, weight);
 
-        applicationService.saveApplication(customerId, loadAddressDto, unloadAddressDto, itemDto);
+        applicationService.saveApplication(customerId, loadAddressDto, unloadAddressDto, itemDto1);
 
         return "redirect:main";
     }

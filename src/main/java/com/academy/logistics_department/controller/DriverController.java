@@ -51,7 +51,6 @@ public class DriverController {
         return "driver/route";
     }
 
-    //NOT READY!!!
     @GetMapping(value = "/route/changeStatus")
     @ResponseBody
     public String changeStatus(@PathVariable Integer driverId,

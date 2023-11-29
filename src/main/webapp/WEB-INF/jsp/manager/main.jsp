@@ -8,7 +8,7 @@
             <table class="tbl">
                 <c:forEach var="aRoute" items="${activeRoutes}">
 
-                    <tr data-href="<c:url value="/manager/${managerId}/route?id=${aRoute.id}"/>">
+                    <tr>
                         <td>
                             <b>ID ${aRoute.id}</b>
                             <br>
