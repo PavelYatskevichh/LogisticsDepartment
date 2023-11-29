@@ -135,7 +135,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public List<ApplicationDto> getAllActiveDriversApplications(RouteDto routeDto) {
-        List<Application> applications = applicationRepository.findAllApplicationsByDriveId(routeDto.getDriver().getId());
+        List<Application> applications = applicationRepository
+                .findAllApplicationsByRouteIdAndDriverId(routeDto.getId(), routeDto.getDriver().getId());
         return applications.stream()
                 .filter(a -> a.getStatus().getStatusName() == ApplicationStatusEnum.WAITING_FOR_LOADING
                         || a.getStatus().getStatusName() == ApplicationStatusEnum.ON_THE_WAY)
@@ -145,9 +146,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public List<ApplicationDto> getAllDeliveredDriversApplications(RouteDto routeDto) {
-        List<Application> applications = applicationRepository.findAllApplicationsByDriveId(routeDto.getDriver().getId());
+        List<Application> applications = applicationRepository
+                .findAllApplicationsByRouteIdAndDriverId(routeDto.getId(), routeDto.getDriver().getId());
         return applications.stream()
-                .filter(a -> a.getStatus().getStatusName() == ApplicationStatusEnum.DELIVERED)
+                .filter(a ->  a.getStatus().getStatusName() == ApplicationStatusEnum.DELIVERED)
                 .map(applicationMapper::toDto)
                 .toList();
     }

@@ -10,5 +10,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
     @Query("FROM Application a WHERE a.customer.id = :customerId")
     List<Application> findAllApplicationsByCustomerId(Integer customerId);
     @Query("SELECT applications FROM Route r WHERE r.driver.id = :driverId")
-    List<Application> findAllApplicationsByDriveId(Integer driverId);
+    List<Application> findAllApplicationsByDriverId(Integer driverId);
+    @Query("SELECT applications FROM Route r WHERE r.id = :routeId AND r.driver.id = :driverId")
+    List<Application> findAllApplicationsByRouteIdAndDriverId(Integer routeId, Integer driverId);
 }

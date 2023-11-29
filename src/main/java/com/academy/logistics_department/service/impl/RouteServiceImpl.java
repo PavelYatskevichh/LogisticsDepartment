@@ -42,16 +42,17 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public RouteDto getDriversCurrentRoute(Integer driverId) {
+    public List<RouteDto> getDriversCurrentRoutes(Integer driverId) {
         List<Route> routeList = routeRepository.findAllRoutesByDriverId(driverId);
+        List<RouteDto> result = new ArrayList<>();
 
         for (Route route : routeList) {
             RouteDto routeDto = routeMapper.toDto(route);
             if (routeDto.getStatus() == RouteStatusEnum.CURRENT) {
-                return routeDto;
+                result.add(routeDto);
             }
         }
-        return null;
+        return result;
     }
 
     @Override

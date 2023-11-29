@@ -21,8 +21,8 @@ public class DriverController {
 
     @GetMapping(value = "/main")
     public String getMain(@PathVariable Integer driverId, Model model) {
-        RouteDto currentRouteDto = routeService.getDriversCurrentRoute(driverId);
-        model.addAttribute("currentRoute", currentRouteDto);
+        List<RouteDto> currentRoutesDto = routeService.getDriversCurrentRoutes(driverId);
+        model.addAttribute("currentRoutes", currentRoutesDto);
 
         List<RouteDto> completedRoutesDto = routeService.getAllDriversCompletedRoutes(driverId);
         model.addAttribute("completedRoutes", completedRoutesDto);
@@ -34,8 +34,8 @@ public class DriverController {
 
     @GetMapping(value = "/route")
     public String getRoute(@PathVariable Integer driverId, @RequestParam Integer id, Model model) {
-        RouteDto currentRouteDto = routeService.getDriversCurrentRoute(driverId);
-        model.addAttribute("currentRoute", currentRouteDto);
+        List<RouteDto> currentRoutesDto = routeService.getDriversCurrentRoutes(driverId);
+        model.addAttribute("currentRoutes", currentRoutesDto);
 
         RouteDto routeDto = routeService.getDriversRouteById(driverId, id);
         model.addAttribute("route", routeDto);

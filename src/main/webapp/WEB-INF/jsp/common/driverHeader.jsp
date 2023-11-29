@@ -21,7 +21,7 @@
                 <a  href='<c:url value="/driver/${driverId}/main"/>'>Main</a>
             </div>
             <div>
-                <a href='<c:url value="/driver/${driverId}/route?id=${currentRoute.id}"/>'>Current route</a>
+                <a href='<c:url value="/driver/${driverId}/route?id=${currentRoutes.stream().findFirst().get().id}"/>'>Current route</a>
             </div>
             <div class="authorization">
                 <a href='<c:url value="/driver/${driverId}/authorization"/>'>Authorization</a>
