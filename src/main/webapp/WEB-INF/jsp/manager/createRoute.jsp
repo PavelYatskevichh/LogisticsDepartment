@@ -1,11 +1,12 @@
 <%@include file="../common/managerHeader.jsp"%>
         <div class="content">
+
+            <div class="title">Applications IDs:</div>
+
             <button class="statusbtn" onclick="add()">Add application Id</button>
             <button class="statusbtn deletebtn" onclick="remove()">Remove</button>
 
             <form action="<c:url value="/manager/${managerId}/createRoute"/>" method="post">
-                <div class="title">Applications IDs:</div>
-
                 <div id="appForm">
                     <input class="input" name="applicationId">
                 </div>

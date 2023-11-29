@@ -21,7 +21,12 @@
                 <a  href='<c:url value="/driver/${driverId}/main"/>'>Main</a>
             </div>
             <div>
-                <a href='<c:url value="/driver/${driverId}/route?id=${currentRoutes.stream().findFirst().get().id}"/>'>Current route</a>
+                <c:if test="${!currentRoutes.isEmpty()}">
+                    <a href='<c:url value="/driver/${driverId}/route?id=${currentRoutes.stream().findFirst().get().id}"/>'>Current route</a>
+                </c:if>
+                <c:if test="${currentRoutes.isEmpty()}">
+                    <a href='' onclick="alert('There is no current route')">Current route</a>
+                </c:if>
             </div>
             <div class="authorization">
                 <a href='<c:url value="/driver/${driverId}/authorization"/>'>Authorization</a>

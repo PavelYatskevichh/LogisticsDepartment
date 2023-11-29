@@ -9,6 +9,7 @@ import com.academy.logistics_department.model.entity.Route;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
 import com.academy.logistics_department.model.enums.RouteStatusEnum;
 import com.academy.logistics_department.model.repository.*;
+import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.RouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -105,8 +106,12 @@ public class RouteServiceImpl implements RouteService {
         ApplicationStatus applicationStatus = applicationStatusRepository.getReferenceById(WAITING_FOR_LOAD_STATUS_ID);
         for (Integer applicationId : applicationIds) {
             Application application = applicationRepository.getReferenceById(applicationId);
-            application.setStatus(applicationStatus);
-            applications.add(application);
+            if (application.getStatus().getStatusName() == ApplicationStatusEnum.PROCESSING) {
+                application.setStatus(applicationStatus);
+                applications.add(application);
+            } else {
+                throw new RuntimeException("Application #" + applicationId + " is already allocated.");
+            }
         }
 
         Route route = Route.builder()

@@ -39,6 +39,7 @@ body {
     cursor: pointer;
     border-radius: 6px;
     border: 1px solid #ddd;
+    margin-bottom: 6px;
 }
 
 .statusbtn:hover {
@@ -206,4 +207,8 @@ footer {
 #appForm {
     display: flex;
     flex-direction: column;
+}
+
+#appForm input {
+    margin-bottom: 3px;
 }
