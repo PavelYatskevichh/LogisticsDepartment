@@ -1,6 +1,8 @@
 package com.academy.logistics_department.controller;
 
 import com.academy.logistics_department.dto.*;
+import com.academy.logistics_department.model.entity.User;
+import com.academy.logistics_department.model.repository.UserRepository;
 import com.academy.logistics_department.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ public class ManagerController {
     private final UserService userService;
     private final AddressService addressService;
     private final ItemService itemService;
+    private final UserRepository userRepository;
 
     @GetMapping(value = "/main")
     public String getMain(@PathVariable Integer managerId, Model model) {
@@ -138,5 +141,13 @@ public class ManagerController {
         applicationService.deleteApplication(applicationId);
 
         return "redirect:unallocated";
+    }
+
+    @GetMapping(value = "/authorization")
+    public String getAuthorization(@PathVariable Integer managerId, Model model) {
+        User user = userRepository.getReferenceById(managerId);
+        model.addAttribute("user", user);
+
+        return "manager/authorization";
     }
 }

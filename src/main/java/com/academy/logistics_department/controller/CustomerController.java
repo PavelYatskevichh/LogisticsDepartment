@@ -3,7 +3,9 @@ package com.academy.logistics_department.controller;
 import com.academy.logistics_department.dto.AddressDto;
 import com.academy.logistics_department.dto.ApplicationDto;
 import com.academy.logistics_department.dto.ItemDto;
+import com.academy.logistics_department.model.entity.User;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
+import com.academy.logistics_department.model.repository.UserRepository;
 import com.academy.logistics_department.service.AddressService;
 import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.ItemService;
@@ -21,6 +23,7 @@ public class CustomerController {
     private final ApplicationService applicationService;
     private final ItemService itemService;
     private final AddressService addressService;
+    private final UserRepository userRepository;
 
     @GetMapping(value = "/main")
     public String getMain(@PathVariable Integer customerId, Model model) {
@@ -72,5 +75,13 @@ public class CustomerController {
         applicationService.saveApplication(customerId, loadAddressDto, unloadAddressDto, itemDto1);
 
         return "redirect:main";
+    }
+
+    @GetMapping(value = "/authorization")
+    public String getAuthorization(@PathVariable Integer customerId, Model model) {
+        User user = userRepository.getReferenceById(customerId);
+        model.addAttribute("user", user);
+
+        return "customer/authorization";
     }
 }

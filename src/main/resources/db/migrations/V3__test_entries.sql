@@ -1,18 +1,18 @@
 insert into user(role_id, first_name, last_name, email_address, phone_number, password)
 values
-    (2, 'Куприянов', 'Алексей', 'ka@velogist.com', "+375291234561", 'Pas_123'),
-    (2, 'Джон', 'Доу', 'jd@velogist.com', "+375291234562", 'Pas_123'),
-    (3, 'Вин', 'Дизель', 'vd@velogist.com', "+375291234563", 'Pas_123'),
-    (3, 'Фрэнк', 'Мартин', 'fm@velogist.com', "+375291234564", 'Pas_123'),
-    (3, 'Иван', 'Иванов', 'ii@velogist.com', "+375291234565", 'Pas_123'),
-    (1, 'Горбачев', 'Олег', 'gorb1990@mail.ru', "+375441231231", 'Pas_123'),
-    (1, 'Караник', 'Ибрагим', 'karaniki@inbox.com', "+375292222222", 'Pas_123'),
-    (1, 'Касперович', 'Руслан', 'kra@gmail.com', "+375291211162", 'Pas_123'),
-    (1, 'Каландаров', 'Вадим', 'vadikkal@yandex.ru', "+375296904562", 'Pas_123'),
-    (1, 'Бабарико', 'Алексей', '3354561@outlook.com', "+375293354561", 'Pas_123'),
-    (1, 'Забело', 'Алексей', 'alex_1981@rambler.com', "+375293321261", 'Pas_123'),
-    (1, 'Петрожицкий', 'Егор', 'a.petrojitskii@slux.com', "+375333354161", 'Pas_123'),
-    (1, 'Павел', 'Гук', 'guk12345@outlook.com', "+375291164561", 'Pas_123');
+    (2, 'Куприянов', 'Алексей', 'ka@velogist.com', "+375291234561", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (2, 'Джон', 'Доу', 'jd@velogist.com', "+375291234562", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (3, 'Вин', 'Дизель', 'vd@velogist.com', "+375291234563", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (3, 'Фрэнк', 'Мартин', 'fm@velogist.com', "+375291234564", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (3, 'Иван', 'Иванов', 'ii@velogist.com', "+375291234565", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Горбачев', 'Олег', 'gorb1990@mail.ru', "+375441231231", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Караник', 'Ибрагим', 'karaniki@inbox.com', "+375292222222", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Касперович', 'Руслан', 'kra@gmail.com', "+375291211162", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Каландаров', 'Вадим', 'vadikkal@yandex.ru', "+375296904562", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Бабарико', 'Алексей', '3354561@outlook.com', "+375293354561", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Забело', 'Алексей', 'alex_1981@rambler.com', "+375293321261", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Петрожицкий', 'Егор', 'a.petrojitskii@slux.com', "+375333354161", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse'),
+    (1, 'Павел', 'Гук', 'guk12345@outlook.com', "+375291164561", '$2a$12$fYTVF6sS/p1riX83GeReBupz49dPyiBwkeWksowYuvVp5lDDP8Cse');
 
 insert into drivers_category(driver_id, category_id)
 values
