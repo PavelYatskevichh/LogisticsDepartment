@@ -2,7 +2,9 @@ package com.academy.logistics_department.controller;
 
 import com.academy.logistics_department.dto.ApplicationDto;
 import com.academy.logistics_department.dto.RouteDto;
+import com.academy.logistics_department.model.entity.User;
 import com.academy.logistics_department.model.enums.ApplicationStatusEnum;
+import com.academy.logistics_department.model.repository.UserRepository;
 import com.academy.logistics_department.service.ApplicationService;
 import com.academy.logistics_department.service.RouteService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.List;
 public class DriverController {
     private final RouteService routeService;
     private final ApplicationService applicationService;
+    private final UserRepository userRepository;
 
     @GetMapping(value = "/main")
     public String getMain(@PathVariable Integer driverId, Model model) {
@@ -60,5 +63,13 @@ public class DriverController {
         ApplicationStatusEnum applicationStatusEnum = applicationService.changeApplicationStatus(routeDto, applicationId);
 
         return applicationStatusEnum.name();
+    }
+
+    @GetMapping(value = "/authorization")
+    public String getAuthorization(@PathVariable Integer driverId, Model model) {
+        User user = userRepository.getReferenceById(driverId);
+        model.addAttribute("user", user);
+
+        return "driver/authorization";
     }
 }
